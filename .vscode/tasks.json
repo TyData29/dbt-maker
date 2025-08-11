@@ -8,7 +8,7 @@
       "args": [
         "-NoExit",
         "-Command",
-        ". ./.secrets/set_env.ps1"
+        ". ./.set_envars/set_env.ps1"
       ],
       "presentation": {
         "echo": true,
