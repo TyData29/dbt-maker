@@ -1,4 +1,4 @@
-default_dbt:
+dbt_project:
   outputs:
     dev:
       type: postgres
