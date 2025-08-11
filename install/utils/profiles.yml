@@ -1,0 +1,14 @@
+default_dbt:
+  outputs:
+    dev:
+      type: postgres
+      threads: 4
+      host: "{{ env_var('POSTGRES_HOSTNAME', '127.0.0.1') }}"
+      port: "{{ env_var('POSTGRES_PORT', 5432) | int }}"
+      user: "{{ env_var('POSTGRES_USER', 'user') }}"
+      pass: "{{ env_var('POSTGRES_PASSWORD', '1234') }}"
+      dbname: "{{ env_var('POSTGRES_DB', 'ccpi_db') }}"
+      schema: "{{ env_var('POSTGRES_DEFAULT_SCHEMA', 'ccpi_db') }}"
+      keepalives_idle: 0
+      
+  target: dev

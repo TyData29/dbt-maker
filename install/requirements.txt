@@ -1,0 +1,13 @@
+dbt-postgres
+
+numpy
+pandas
+pytest
+pyyaml
+
+sqlpage
+sqlalchemy
+
+jsonify
+
+python-dotenv
