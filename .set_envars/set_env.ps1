@@ -5,17 +5,32 @@ $env:PROJECT_ROOT_DIR = Split-Path $PSScriptRoot -Parent
 Write-Host "Root directory: $env:PROJECT_ROOT_DIR"
 # Charger les variables depuis le fichier .env
 $envFile = Join-Path $env:PROJECT_ROOT_DIR ".env"
+Write-Host "Loading environment variables from: $envFile"
 if (Test-Path $envFile) {
-    Get-Content $envFile | ForEach-Object {
-        if ($_ -match "^\s*([^#\s][^=]*)\s*=\s*(.*)\s*$") {
-            $envName = $matches[1]
-            $envValue = $matches[2]
+    Get-Content -LiteralPath $envFile | ForEach-Object {
+        $line = $_.Trim()
+        if (-not $line -or $line.StartsWith('#')) { return }   # skip vide/commentaire
 
-            # >>> $env:$envName = $envValue
-            [System.Environment]::SetEnvironmentVariable($envName, $envValue)
+        # clé=valeur (tout ce qui suit le premier '=' fait partie de la valeur)
+        $eq = $line.IndexOf('=')
+        if ($eq -lt 1) { return }
+        $envName  = $line.Substring(0, $eq).Trim()
+        $envValue = $line.Substring($eq + 1).Trim()
 
-            #Write-Host "Chargé : $envName=$envValue"
+        # nettoyer BOM éventuel sur le premier nom
+        $envName = $envName -replace "^\uFEFF",""
+
+        # enlever des guillemets éventuels autour de la valeur
+        if (($envValue.StartsWith('"') -and $envValue.EndsWith('"')) -or
+            ($envValue.StartsWith("'") -and $envValue.EndsWith("'"))) {
+            $envValue = $envValue.Substring(1, $envValue.Length - 2)
         }
+
+        # assignation scope Process (session courante)
+        #${Global:Env:$envName} = $envValue
+        [System.Environment]::SetEnvironmentVariable($envName, $envValue, "Process")
+
+        Write-Host "Chargé : $envName=$envValue > " [Environment]::GetEnvironmentVariable($envName,'Process')
     }
 } else {
     Write-Host ".env file $envFile non trouvé"
