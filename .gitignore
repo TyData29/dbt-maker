@@ -1,0 +1,6 @@
+.venv/
+.env
+*.code-workspace
+logs/
+*.log
+.secrets/set_env.ps1
