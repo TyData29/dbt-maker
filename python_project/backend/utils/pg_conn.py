@@ -14,9 +14,9 @@ class PG_conn:
         # Récupération des variables d'environnement
         try:
             self.credentials = {
-                "host": os.environ["POSTGRES_HOST"],
+                "host": os.environ["POSTGRES_HOSTNAME"],
                 "port": os.environ.get("POSTGRES_PORT", 5432),
-                "dbname": os.environ["POSTGRES_DBNAME"],
+                "dbname": os.environ["POSTGRES_DB"],
                 "user": os.environ["POSTGRES_USER"],
                 "password": os.environ["POSTGRES_PASSWORD"]
             }
