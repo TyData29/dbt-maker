@@ -43,7 +43,7 @@ Créer un **environnement virtuel** dans un nouveau répertoire
 3. Ouvrir un nouveau terminal et vérifer le bon chargement des variables d'environnement: `> $env:POSTGRES_DEFAULT_SCHEMA` ou équivalent (dans la liste des variables d'environnement définies dans `.env`) 
    Elles sont en principe chargées automatiquement par les scripts situés dans `.vscode/` et `.set_envars/`
 4. Mettre à jour `install/requirements.txt` si nécessaire 
-5. Placé dans `install/` exécuter : `.\install.bat` (**ne pas** utiliser l'extension `--dbt-setup`)
+5. Placé dans `install/` exécuter : `.\install.bat` (**ne surtout pas** utiliser l'extension `--dbt-setup`)
 6. A vous de jouer !
 
 ### Lancez-vous ! Exécuter le workflow dbt... (enfin si c'est pertinent, à vous de voir !)
