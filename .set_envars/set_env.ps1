@@ -30,8 +30,9 @@ if (Test-Path $envFile) {
         #${Global:Env:$envName} = $envValue
         [System.Environment]::SetEnvironmentVariable($envName, $envValue, "Process")
 
-        Write-Host "Chargé : $envName=$envValue > " [Environment]::GetEnvironmentVariable($envName,'Process')
+        #Write-Host "Chargé : $envName=$envValue > " [Environment]::GetEnvironmentVariable($envName,'Process')
     }
+    Write-Host "Chargement des variables d'environnement OK !"
 } else {
     Write-Host ".env file $envFile non trouvé"
 }
