@@ -40,7 +40,7 @@ Rien de plus facile
 Créer un **environnement virtuel** dans un nouveau répertoire
 2. Utiliser le menu Start > Clone Git Repository et **cloner le repo souhaité** dans le répertoire choisi
 2. Enregistrer `.env.template` comme `.env` **PUIS** renseigner les variables
-3. Ouvrir un nouveau terminal et vérifer le bon chargement des variables d'environnement: `> $env:POSTGRES_HUB` ou équivalent (dans la liste des variables d'environnement définies dans `.env`) 
+3. Ouvrir un nouveau terminal et vérifer le bon chargement des variables d'environnement: `> $env:POSTGRES_DEFAULT_SCHEMA` ou équivalent (dans la liste des variables d'environnement définies dans `.env`) 
    Elles sont en principe chargées automatiquement par les scripts situés dans `.vscode/` et `.set_envars/`
 4. Mettre à jour `install/requirements.txt` si nécessaire 
 5. Placé dans `install/` exécuter : `.\install.bat` (**ne pas** utiliser l'extension `--dbt-setup`)
