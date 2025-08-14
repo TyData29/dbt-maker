@@ -29,18 +29,33 @@ echo [dbt-setup] ROOT_DIR      = "%ROOT_DIR%"
 echo [dbt-setup] PROJECT_DIR   = "%PROJECT_DIR%"
 echo [dbt-setup] SRC_PROFILES  = "%SRC_PROFILES%"
 
-REM 2) Creer le repertoire du projet
+REM 2) Creer (ou recreer) le repertoire du projet
 if not exist "%ROOT_DIR%\" (
   echo [ERREUR] Racine introuvable: "%ROOT_DIR%".
   exit /b 1
 )
 
 if exist "%PROJECT_DIR%\" (
-  dir /a "%PROJECT_DIR%" | findstr /r "^[ ]*[0-9][0-9]*" >nul
-  if not errorlevel 1 (
-    echo [ERREUR] Le dossier "%PROJECT_DIR%" existe et n'est pas vide. Abandon.
-    echo          ^(Vider le dossier ou definir FORCE=1 pour continuer et laisser dbt gerer.^)
-    if not "%FORCE%"=="1" exit /b 1
+  if "%FORCE%"=="1" (
+    echo [dbt-setup] FORCE=1 -> suppression de "%PROJECT_DIR%"
+    rmdir /S /Q "%PROJECT_DIR%"
+    if errorlevel 1 (
+      echo [ERREUR] Echec de suppression du dossier projet.
+      exit /b 1
+    )
+    mkdir "%PROJECT_DIR%"
+    if errorlevel 1 (
+      echo [ERREUR] Echec de creation du dossier projet.
+      exit /b 1
+    )
+  ) else (
+    REM S’il existe et n’est pas vide -> bloquer (conseiller FORCE=1)
+    dir /a "%PROJECT_DIR%" | findstr /r "^[ ]*[0-9][0-9]*" >nul
+    if not errorlevel 1 (
+      echo [ERREUR] Le dossier "%PROJECT_DIR%" existe et n'est pas vide.
+      echo         Utilise FORCE=1 pour le purger et le recreer.
+      exit /b 1
+    )
   )
 ) else (
   mkdir "%PROJECT_DIR%"
