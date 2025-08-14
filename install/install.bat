@@ -1,18 +1,18 @@
 @echo off
-echo Installation des dépendances Python...
+echo Installation des dependances Python...
 pip install -r requirements.txt
-echo Installation des dépendances Python terminée.
+echo Installation des dependances Python terminee.
 
 :: Vérifier si le paramètre --dbt-setup est passé
 set PARAM=%1
 if "%PARAM%"=="--dbt-setup" (
-    echo Exécution de dbt_setup.bat...
+    echo Execution de dbt_setup.bat...
     call dbt_setup.bat
-    echo Configuration DBT terminée.
+    echo Configuration DBT terminee.
     call python_project_setup.bat
-    echo Configuration du projet Python terminée.
+    echo Configuration du projet Python terminee.
 ) else (
-    echo INFO : pour un setup dbt, utiliser --dbt-setup comme paramètre
+    echo INFO : pour un setup dbt, utiliser --dbt-setup comme parametre
 )
 
 
