@@ -1,6 +1,6 @@
 # Lien du projet
 
-https://github.com/TyData29/dbt-maker
+[dbt-maker](https://github.com/TyData29/dbt-maker)
 
 # What's this ?
 
@@ -48,7 +48,7 @@ Créer un **environnement virtuel** dans un nouveau répertoire
 
 ### Commandes dbt à lancer pour exécuter le workflow
 Dans un terminal Powershell, se positionner dans le répertoire du projet dbt (dans le doute, rechercher le fichier `dbt_project.yml`)
-> `dbt build` pour exécuter l'intégralité du workflow (voir la doc de dbt pour + d'infos)
+> `dbt build` pour exécuter l'intégralité du workflow (voir la [doc de dbt pour + d'infos](https://docs.getdbt.com/docs/introduction) )
 
 # Crédits
 @ [TyData - Freelance Geodata Expert & Analytics Engineer](https://github.com/TyData29)
