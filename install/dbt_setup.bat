@@ -27,9 +27,9 @@ if not exist "%PROFILES_SRC%" (
 
 set "PROJECT_DIR=%ROOT_DIR%\%DBT_PROJECT_NAME%"
 
-echo [dbt-setup] ROOT_DIR     = "%ROOT_DIR%"
-echo [dbt-setup] PROJECT_DIR  = "%PROJECT_DIR%"
-echo [dbt-setup] PROFILES_SRC = "%PROFILES_SRC%"
+echo [dbt-maker-setup:->dbt] ROOT_DIR     = "%ROOT_DIR%"
+echo [dbt-maker-setup:->dbt] PROJECT_DIR  = "%PROJECT_DIR%"
+echo [dbt-maker-setup:->dbt] PROFILES_SRC = "%PROFILES_SRC%"
 
 REM 2) Detecter le nom du profil (cle YAML racine) si non fourni
 if "%DBT_PROFILE_NAME%"=="" (
@@ -44,12 +44,12 @@ if "%DBT_PROFILE_NAME%"=="" (
     exit /b 1
   )
 )
-echo [dbt-setup] PROFILE_NAME = "%DBT_PROFILE_NAME%"
+echo [dbt-maker-setup:->dbt] PROFILE_NAME = "%DBT_PROFILE_NAME%"
 
 REM 3) Si FORCE=1 et que le projet existe, supprimer avant dbt init
 if exist "%PROJECT_DIR%\" (
   if /I "%FORCE%"=="1" (
-    echo [dbt-setup] FORCE=1 -> suppression de "%PROJECT_DIR%"
+    echo [dbt-maker-setup:->dbt] FORCE=1 -> suppression de "%PROJECT_DIR%"
     rmdir /S /Q "%PROJECT_DIR%"
     if errorlevel 1 (
       echo([ERREUR] Echec de suppression de "%PROJECT_DIR%".
@@ -72,10 +72,10 @@ if errorlevel 1 (
   exit /b 1
 )
 
-echo [dbt-setup][dbg] CWD avant init  : %CD%
-echo [dbt-setup][dbg] profiles-dir    : %PROFILES_DIR%
+echo [dbt-maker-setup:->dbt][dbg] CWD avant init  : %CD%
+echo [dbt-maker-setup:->dbt][dbg] profiles-dir    : %PROFILES_DIR%
 
-echo [dbt-setup] Lancement: dbt init "%DBT_PROJECT_NAME%" --profile "%DBT_PROFILE_NAME%" --profiles-dir "%PROFILES_DIR%"
+echo [dbt-maker-setup:->dbt] Lancement: dbt init "%DBT_PROJECT_NAME%" --profile "%DBT_PROFILE_NAME%" --profiles-dir "%PROFILES_DIR%"
 dbt init "%DBT_PROJECT_NAME%" --profile "%DBT_PROFILE_NAME%" --profiles-dir "%PROFILES_DIR%"
 set "ERR=%ERRORLEVEL%"
 
@@ -99,5 +99,5 @@ if not "%DBG_ERR%"=="0" (
   echo([AVERTISSEMENT] dbt debug a signale un probleme de profil/connexion.
 )
 
-echo [dbt-setup] Termine.
+echo [dbt-maker-setup:->dbt] Termine.
 exit /b 0
