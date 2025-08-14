@@ -9,6 +9,7 @@ if "%PARAM%"=="--dbt-setup" (
     echo Execution de dbt_setup.bat...
     call dbt_setup.bat
     echo Configuration DBT terminee.
+    echo ---------------------------
     call python_project_setup.bat
     echo Configuration du projet Python terminee.
 ) else (
